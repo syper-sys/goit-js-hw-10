@@ -19,7 +19,7 @@ const options = {
     minuteIncrement: 1,
     onClose(selectedDates) {
         userSelectedDate = selectedDates[0];
-        if (userSelectedDate < new Date()) {
+        if (userSelectedDate <= new Date()) {
             iziToast.error({
                 message: 'Please choose a date in the future',
             });
@@ -43,13 +43,14 @@ startBtn.addEventListener('click', () => {
         timeValues[1].textContent = timeStr.hours;
         timeValues[2].textContent = timeStr.minutes;
         timeValues[3].textContent = timeStr.seconds;
-        if (diff < 1000) {
+        if (diff <= 1000) {
             clearInterval(intervalId);
             input.disabled = false;
-            startBtn.disabled = false;
+            startBtn.disabled = true;
+            userSelectedDate = null;
         }
     
-    })
+    }, 1000)
 })
 
 
